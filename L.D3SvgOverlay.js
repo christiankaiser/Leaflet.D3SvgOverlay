@@ -1,8 +1,8 @@
 /**
- * Copyright 2015 Teralytics AG
- *
+ * Initial work by Teralytics AG (Copyright 2015)
  * @author Kirill Zhuravlev <kirill.zhuravlev@teralytics.ch>
  *
+ * Adapted to Leaflet 1.0 and d3 v4 by Christian Kaiser in 2017.
  */
 
 (function (factory) {
@@ -24,15 +24,12 @@ if (typeof L == "undefined") {
 }
 
 // Tiny stylesheet bundled here instead of a separate file
-if (L.version >= "1.0") {
-    d3.select("head")
-        .append("style").attr("type", "text/css")
-        .text("g.d3-overlay *{pointer-events:visiblePainted;}");
-}
+d3.select("head")
+    .append("style").attr("type", "text/css")
+    .text("g.d3-overlay *{pointer-events:visiblePainted;}");
 
 // Class definition
-L.D3SvgOverlay = (L.version < "1.0" ? L.Class : L.Layer).extend({
-    includes: (L.version < "1.0" ? L.Mixin.Events : []),
+L.D3SvgOverlay = (L.Layer).extend({
 
     _undef: function(a){ return typeof a == "undefined" },
 
@@ -89,16 +86,9 @@ L.D3SvgOverlay = (L.version < "1.0" ? L.Class : L.Layer).extend({
         var _layer = this;
 
         // SVG element
-        if (L.version < "1.0") {
-            map._initPathRoot();
-            this._svg = d3.select(map._panes.overlayPane)
-                .select("svg");
-            this._rootGroup = this._svg.append("g");
-        } else {
-            this._svg = L.svg();
-            map.addLayer(this._svg);
-            this._rootGroup = d3.select(this._svg._rootGroup).classed("d3-overlay", true);
-        }
+        this._svg = L.svg();
+        map.addLayer(this._svg);
+        this._rootGroup = d3.select(this._svg._rootGroup).classed("d3-overlay", true);
         this._rootGroup.classed("leaflet-zoom-hide", this.options.zoomHide);
         this.selection = this._rootGroup;
 
@@ -132,30 +122,23 @@ L.D3SvgOverlay = (L.version < "1.0" ? L.Class : L.Layer).extend({
             this.stream.point(point.x, point.y);
         };
         this.projection.pathFromGeojson =
-            d3.geo.path().projection(d3.geo.transform({point: this.projection._projectPoint}));
+            d3.geoPath().projection(d3.geoTransform({point: this.projection._projectPoint}));
 
-        // Compatibility with v.1
         this.projection.latLngToLayerFloatPoint = this.projection.latLngToLayerPoint;
         this.projection.getZoom = this.map.getZoom.bind(this.map);
         this.projection.getBounds = this.map.getBounds.bind(this.map);
         this.selection = this._rootGroup;
 
-        if (L.version < "1.0") map.on("viewreset", this._zoomChange, this);
-
         // Initial draw
         this.draw();
     },
 
-    // Leaflet 1.0
-    getEvents: function() { return {zoomend: this._zoomChange}; },
+    getEvents: function() { 
+        return {zoomend: this._zoomChange};
+    },
 
     onRemove: function (map) {
-        if (L.version < "1.0") {
-            map.off("viewreset", this._zoomChange, this);
-            this._rootGroup.remove();
-        } else {
-            this._svg.remove();
-        }
+        this._svg.remove();
     },
 
     addTo: function (map) {
@@ -165,7 +148,7 @@ L.D3SvgOverlay = (L.version < "1.0" ? L.Class : L.Layer).extend({
 
 });
 
-L.D3SvgOverlay.version = "2.2";
+L.D3SvgOverlay.version = "3.0";
 
 // Factory method
 L.d3SvgOverlay = function (drawCallback, options) {
