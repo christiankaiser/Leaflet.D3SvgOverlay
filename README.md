@@ -2,7 +2,7 @@
 
 An overlay class for [Leaflet](http://leafletjs.com), a JS library for interactive maps.  Allows drawing overlay using SVG with the help of [D3](http://d3js.org), a JavaScript library for manipulating documents based on data.
 
-This plugin has initially been developed by [Teralytics AG](https://github.com/teralytics/Leaflet.D3SvgOverlay) and has been adapted to D3 v4 and Leaflet 1.0 by [Christian Kaiser](https://github.com/christiankaiser).
+This plugin has initially been developed by [Teralytics AG](https://github.com/teralytics/Leaflet.D3SvgOverlay) and has been adapted to D3 v4/v5 and Leaflet 1.0+ by [Christian Kaiser](https://github.com/christiankaiser).
 
 ## Features
 
@@ -11,7 +11,7 @@ This plugin has initially been developed by [Teralytics AG](https://github.com/t
  * No need to reproject your geometries on zoom, this is done using SVG scaling
  * Zoom animation where Leaflet supports it
 
-___Compatible with Leaflet 1.0.x and d3 v4.___
+___Compatible with Leaflet 1.0 and later, and d3 v4 and v5.___
 
 
 ## Examples
@@ -23,9 +23,9 @@ There is a folder with simple examples you can use to get started.
 Include the dependency libraries:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg==" crossorigin=""></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
 ```
 
 Include the D3SvgOverlay library:

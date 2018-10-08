@@ -8,7 +8,7 @@ var vec200_topojson = null;
 
 var cantonsOverlay = L.d3SvgOverlay(function(sel, proj){
 
-  features = sel.selectAll('path')
+  var features = sel.selectAll('path')
     .data(topojson.feature(vec200_topojson, vec200_topojson.objects.cantons).features);
 
   features
@@ -17,7 +17,7 @@ var cantonsOverlay = L.d3SvgOverlay(function(sel, proj){
     .attr('stroke','white')
     .attr('fill', 'red')
     .attr('fill-opacity', 0.5)
-    .attr('d', proj.pathFromGeojson);
+    .attr('d', proj.pathFromGeojson)
 
   features
     .attr('stroke-width', 0.6 / proj.scale);
@@ -25,7 +25,7 @@ var cantonsOverlay = L.d3SvgOverlay(function(sel, proj){
 });
 
 
-d3.json('vec200-cantons-topo.json', function(data){
+d3.json('vec200-cantons-topo.json').then(function(data){
   vec200_topojson = data;
   cantonsOverlay.addTo(map);
 });

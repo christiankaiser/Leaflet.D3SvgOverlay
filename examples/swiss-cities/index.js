@@ -19,17 +19,16 @@ var citiesOverlay = L.d3SvgOverlay(function(sel, proj){
     .attr('fill',function(d){return (d.place == 'capital') ? "red" : "blue";});
 });
 
-d3.csv("swiss-cities.csv",function(data){
-  cities = data.map(function(d){
-    d.latLng = [+d.lat,+d.lng];
-    d.population = (d.population == '') ? 0 : +d.population;
-    return d;
-  });
+d3.csv("swiss-cities.csv", function(d){
+  d.latLng = [+d.lat,+d.lng];
+  d.population = (d.population == '') ? 0 : +d.population;
+  return d;
+}).then(function(data){
   // Sort the cities according to the population in decreasing order
   // so we can draw proportional symbols correctly
+  cities = data;
   cities.sort(function(a,b) {
     return (a.population > b.population) ? -1 : ((b.population > a.population) ? 1 : 0);
   });
   citiesOverlay.addTo(map);
 });
-
