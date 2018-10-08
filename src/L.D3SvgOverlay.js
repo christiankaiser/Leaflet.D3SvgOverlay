@@ -148,7 +148,7 @@ L.D3SvgOverlay = (L.Layer).extend({
 
 });
 
-L.D3SvgOverlay.version = "3.0";
+L.D3SvgOverlay.version = "3.0.1";
 
 // Factory method
 L.d3SvgOverlay = function (drawCallback, options) {
@@ -156,3 +156,8 @@ L.d3SvgOverlay = function (drawCallback, options) {
 };
 
 }));
+
+
+if (typeof(module) !== 'undefined' && module.exports) {
+  module.exports = L.d3SvgOverlay;
+}
