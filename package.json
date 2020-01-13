@@ -1,9 +1,9 @@
 {
-  "name": "leaflet-d3-svg-overlay",
+  "name": "d3-svg-overlay-leaflet",
   "description": "Leaflet Plugin: D3 SVG Overlay",
-  "author": "Christian Kaiser <christian.kaiser@unil.ch>",
+  "author": "Christian Kaiser",
   "version": "3.0.0",
-  "main": "L.D3SvgOverlay.js",
+  "main": "src/L.D3SvgOverlay.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,10 +11,13 @@
     "type": "git",
     "url": "git+https://github.com/christiankaiser/Leaflet.D3SvgOverlay.git"
   },
+  "bugs": {
+    "url": "https://github.com/christiankaiser/Leaflet.D3SvgOverlay/issues"
+  },
   "license": "MIT",
   "homepage": "https://github.com/christiankaiser/Leaflet.D3SvgOverlay#readme",
   "dependencies": {
-    "d3": "^4.8.0",
+    "d3": "^5.0.0",
     "leaflet": "^1.0.0"
   },
   "devDependencies": {
